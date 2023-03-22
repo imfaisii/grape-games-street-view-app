@@ -8,6 +8,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    @livewireStyles
+    @livewireScripts
+
     <!-- Styles -->
     @vite('resources/sass/app.scss')
 
