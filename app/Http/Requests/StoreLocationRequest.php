@@ -6,23 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreLocationRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'Title' => ['required', 'string', 'max:255'],
+            'imgUrl' => ['required', 'image'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'isVar' => ['required', 'boolean'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'details' => ['required']
         ];
     }
 }

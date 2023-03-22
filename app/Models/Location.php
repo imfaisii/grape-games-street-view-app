@@ -15,6 +15,7 @@ class Location extends Model
         'Title',
         'category',
         'imgUrl',
+        'isVar',
         'country',
         'city',
         'details',

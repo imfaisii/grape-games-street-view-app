@@ -31,12 +31,46 @@
             <span class="sidebar-text">{{ __('Users') }}</span>
         </a>
     </li>
-    <li class="nav-item {{ request()->routeIs('locations.index') ? 'active' : '' }}">
-        <a href="{{ route('users.index') }}" class="nav-link">
-            <span class="sidebar-icon me-3">
-                <i class="fas fa-user-alt fa-fw"></i>
+
+    <li class="nav-item">
+        <span
+            class="nav-link d-flex justify-content-between align-items-center {{ !(request()->routeIs('locations.index') || request()->routeIs('locations.create')) ? 'collapsed' : '' }}"
+            data-bs-toggle="collapse" data-bs-target="#submenu-app">
+            <span>
+                <span class="sidebar-icon me-3">
+                    <i class="fas fa-map-marker fa-fw"></i>
+                </span>
+                <span class="sidebar-text">Locations</span>
             </span>
-            <span class="sidebar-text">{{ __('Locations') }}</span>
-        </a>
+            <span class="link-arrow">
+                <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+            </span>
+        </span>
+        <div class="multi-level {{ !(request()->routeIs('locations.index') || request()->routeIs('locations.create')) ? 'collapse' : '' }}"
+            role="list" id="submenu-app" aria-expanded="false">
+            <ul class="flex-column nav">
+                <li class="nav-item {{ request()->routeIs('locations.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('locations.index') }}">
+                        <span class="sidebar-icon">
+                            <i class="fas fa-circle"></i>
+                        </span>
+                        <span class="sidebar-text">List</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('locations.create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('locations.create') }}">
+                        <span class="sidebar-icon">
+                            <i class="fas fa-circle"></i>
+                        </span>
+                        <span class="sidebar-text">Create</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </li>
 </ul>
