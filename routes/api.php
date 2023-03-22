@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Auth\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,12 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('/user', fn (Request $request) => $request->user());
 
-    Route::post('/login', [AuthController::class, 'store'])
-        ->name('login');
-
     Route::post('/logout', [AuthController::class, 'destroy'])
         ->name('logout');
 });
+
+Route::post('/login', [AuthController::class, 'store'])
+    ->name('login');
+
+Route::get('locations', [LocationController::class, 'getAllLocations']);
+Route::get('locations/{name}', [LocationController::class, 'getAllLocationsByCategoryName']);

@@ -25,7 +25,7 @@ class LocationController extends Controller
 
     public function upload($file): string
     {
-        return $file->store('images');
+        return $file->store('images', 'public');
     }
 
     public function store(StoreLocationRequest $request)
