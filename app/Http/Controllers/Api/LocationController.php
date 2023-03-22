@@ -6,14 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Traits\Jsonify;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class LocationController extends Controller
 {
     use Jsonify;
 
-    public function getAllLocations(): JsonResponse
+    public function getAllLocations(Request $request): JsonResponse
     {
-        $data = Location::all()->map(fn ($location) => [
+        $query = Location::query();
+        $fillables = app(Location::class)->getFillable();
+        $filters = $request->all();
+
+        foreach ($filters as $column => $value) {
+            if (in_array($column, $fillables)) {
+                $query->where($column, 'LIKE', "%$value%");
+            }
+        }
+
+        $data = $query->get()->map(fn ($location) => [
             'isVar' => $location->isVar,
             'Title' => $location->Title,
             'imgUrl' => $location->image_url,
@@ -26,9 +38,19 @@ class LocationController extends Controller
         return self::success(data: $data);
     }
 
-    public function getAllLocationsByCategoryName(string $name): JsonResponse
+    public function getAllLocationsByCategoryName(Request $request, string $name): JsonResponse
     {
-        $data = Location::whereHas('category', function ($q) use ($name) {
+        $query = Location::query();
+        $fillables = app(Location::class)->getFillable();
+        $filters = $request->all();
+
+        foreach ($filters as $column => $value) {
+            if (in_array($column, $fillables)) {
+                $query->where($column, 'LIKE', "%$value%");
+            }
+        }
+
+        $data = $query->whereHas('category', function ($q) use ($name) {
             $q->select('name')->whereName($name);
         })->get()->map(fn ($location) => [
             'isVar' => $location->isVar,
