@@ -11,10 +11,10 @@
                 <thead>
                     <tr>
                         <th class="border-gray-200">{{ __('Title') }}</th>
-                        <th class="border-gray-200">{{ __('Is Variable') }}</th>
+                        <th class="border-gray-200">{{ __('Is Favorite?') }}</th>
                         <th class="border-gray-200">{{ __('Country') }}</th>
-                        <th class="border-gray-200">{{ __('Details') }}</th>
                         <th class="border-gray-200">{{ __('Category') }}</th>
+                        <th class="border-gray-200">{{ __('Details') }}</th>
                         <th class="border-gray-200">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -24,7 +24,7 @@
                             <td><span class="fw-normal">{{ $location->Title }}</span></td>
                             <td>
                                 <span class="fw-normal">
-                                    @if ($location->isVar)
+                                    @if ($location->isFav)
                                         <span class="badge bg-success">Yes</span>
                                     @else
                                         <span class="badge bg-danger">No</span>
@@ -32,15 +32,20 @@
                                 </span>
                             </td>
                             <td><span class="fw-normal">{{ "{$location->city}, {$location->country}" }}</span></td>
-                            <td><span class="fw-normal">{{ $location->details }}</span></td>
+                            <td><span class="fw-normal">{{ $location->category->name }}</span></td>
                             <td><span class="fw-normal">{{ $location->details }}</span></td>
                             <td>
-                                <form action="{{ route('locations.destroy', ['location' => $location->id]) }}"
-                                    method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                </form>
+                                <div class="d-flex">
+                                    <form class="mx-2"
+                                        action="{{ route('locations.destroy', ['location' => $location->id]) }}"
+                                        method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                    <a href="{{ route('locations.edit', ['location' => $location->id]) }}"
+                                        class="btn btn-info btn-sm">Edit</a>
+                                </div>
                             </td>
                         </tr>
                     @empty

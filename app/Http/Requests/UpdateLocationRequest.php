@@ -11,18 +11,19 @@ class UpdateLocationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'Title' => ['required', 'string', 'max:255'],
+            'imgUrl' => ['sometimes', 'image'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'isFav' => ['required', 'boolean'],
+            'category_id' => ['required', 'exists:categories,id'],
+            'details' => ['required']
         ];
     }
 }

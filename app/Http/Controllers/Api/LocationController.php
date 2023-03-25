@@ -26,7 +26,7 @@ class LocationController extends Controller
         }
 
         $data = $query->get()->map(fn ($location) => [
-            'isVar' => $location->isVar,
+            'isFav' => $location->isFav,
             'Title' => $location->Title,
             'imgUrl' => $location->image_url,
             'country' => $location->country,
@@ -53,7 +53,7 @@ class LocationController extends Controller
         $data = $query->whereHas('category', function ($q) use ($name) {
             $q->select('name')->whereName($name);
         })->get()->map(fn ($location) => [
-            'isVar' => $location->isVar,
+            'isFav' => $location->isFav,
             'Title' => $location->Title,
             'imgUrl' => $location->image_url,
             'country' => $location->country,

@@ -11,7 +11,7 @@ class LocationController extends Controller
 {
     public function index()
     {
-        $locations = Location::paginate();
+        $locations = Location::with('category')->paginate();
 
         return view('locations.index', compact('locations'));
     }
@@ -23,9 +23,25 @@ class LocationController extends Controller
         return view('locations.create', compact('categories'));
     }
 
-    public function upload($file): string
+    public function edit(Location $location)
     {
-        return $file->store('images', 'public');
+        $categories = Category::all();
+
+        return view('locations.edit', compact('location', 'categories'));
+    }
+
+    public function update(UpdateLocationRequest $request, Location $location)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('imgUrl')) {
+            $data['imgUrl'] = parent::upload($data['imgUrl']);
+        }
+
+        $location->update($data);
+
+        toastr()->success('Location was updated successfully.');
+        return $this->index();
     }
 
     public function store(StoreLocationRequest $request)
@@ -33,12 +49,12 @@ class LocationController extends Controller
         $data = $request->validated();
 
         if ($request->hasFile('imgUrl')) {
-            $data['imgUrl'] = $this->upload($data['imgUrl']);
+            $data['imgUrl'] = parent::upload($data['imgUrl']);
         }
 
         auth()->user()->locations()->create($data);
-        toastr()->success('Location was saved successfully.');
 
+        toastr()->success('Location was saved successfully.');
         return back();
     }
 

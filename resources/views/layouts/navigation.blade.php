@@ -34,8 +34,50 @@
 
     <li class="nav-item">
         <span
+            class="nav-link d-flex justify-content-between align-items-center {{ !(request()->routeIs('categories.index') || request()->routeIs('locations.create')) ? 'collapsed' : '' }}"
+            data-bs-toggle="collapse" data-bs-target="#submenu-categories">
+            <span>
+                <span class="sidebar-icon me-3">
+                    <i class="fas fa-layer-group fa-fw"></i>
+                </span>
+                <span class="sidebar-text">Categories</span>
+            </span>
+            <span class="link-arrow">
+                <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd">
+                    </path>
+                </svg>
+            </span>
+        </span>
+        <div class="multi-level {{ !(request()->routeIs('categories.index') || request()->routeIs('categories.create')) ? 'collapse' : '' }}"
+            role="list" id="submenu-categories" aria-expanded="false">
+            <ul class="flex-column nav">
+                <li class="nav-item {{ request()->routeIs('categories.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('categories.index') }}">
+                        <span class="sidebar-icon">
+                            <i class="fas fa-circle"></i>
+                        </span>
+                        <span class="sidebar-text">List</span>
+                    </a>
+                </li>
+                <li class="nav-item {{ request()->routeIs('categories.create') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('categories.create') }}">
+                        <span class="sidebar-icon">
+                            <i class="fas fa-circle"></i>
+                        </span>
+                        <span class="sidebar-text">Create</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+
+    <li class="nav-item">
+        <span
             class="nav-link d-flex justify-content-between align-items-center {{ !(request()->routeIs('locations.index') || request()->routeIs('locations.create')) ? 'collapsed' : '' }}"
-            data-bs-toggle="collapse" data-bs-target="#submenu-app">
+            data-bs-toggle="collapse" data-bs-target="#submenu-locations">
             <span>
                 <span class="sidebar-icon me-3">
                     <i class="fas fa-map-marker fa-fw"></i>
@@ -52,7 +94,7 @@
             </span>
         </span>
         <div class="multi-level {{ !(request()->routeIs('locations.index') || request()->routeIs('locations.create')) ? 'collapse' : '' }}"
-            role="list" id="submenu-app" aria-expanded="false">
+            role="list" id="submenu-locations" aria-expanded="false">
             <ul class="flex-column nav">
                 <li class="nav-item {{ request()->routeIs('locations.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('locations.index') }}">

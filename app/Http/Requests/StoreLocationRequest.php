@@ -18,7 +18,7 @@ class StoreLocationRequest extends FormRequest
             'imgUrl' => ['required', 'image'],
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
-            'isVar' => ['required', 'boolean'],
+            'isFav' => ['required', 'boolean'],
             'category_id' => ['required', 'exists:categories,id'],
             'details' => ['required']
         ];

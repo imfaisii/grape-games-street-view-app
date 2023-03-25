@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->boolean('isVar');
+            $table->boolean('isFav');
             $table->string('Title');
             $table->string('imgUrl');
             $table->string('country');
