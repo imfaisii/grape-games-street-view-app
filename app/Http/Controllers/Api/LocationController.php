@@ -26,13 +26,14 @@ class LocationController extends Controller
         }
 
         $data = $query->get()->map(fn ($location) => [
+            'id' => $location->id,
             'isFav' => $location->isFav,
             'Title' => $location->Title,
             'imgUrl' => $location->image_url,
             'country' => $location->country,
             'city' => $location->city,
             'details' => $location->details,
-            'category' => $location->category->name
+            'category' => $location?->category?->name ?? 'Not found.'
         ]);
 
         return self::success(data: $data);
@@ -53,13 +54,14 @@ class LocationController extends Controller
         $data = $query->whereHas('category', function ($q) use ($name) {
             $q->select('name')->whereName($name);
         })->get()->map(fn ($location) => [
+            'id' => $location->id,
             'isFav' => $location->isFav,
             'Title' => $location->Title,
             'imgUrl' => $location->image_url,
             'country' => $location->country,
             'city' => $location->city,
             'details' => $location->details,
-            'category' => $location->category->name
+            'category' => $location?->category?->name ?? 'Not found.'
         ]);
 
         return self::success(data: $data);

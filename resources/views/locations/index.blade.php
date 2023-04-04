@@ -32,7 +32,7 @@
                                 </span>
                             </td>
                             <td><span class="fw-normal">{{ "{$location->city}, {$location->country}" }}</span></td>
-                            <td><span class="fw-normal">{{ $location->category->name }}</span></td>
+                            <td><span class="fw-normal">{{ $location?->category?->name ?? 'Not found' }}</span></td>
                             <td><span class="fw-normal">{{ $location->details }}</span></td>
                             <td>
                                 <div class="d-flex">

@@ -30,6 +30,8 @@ class Location extends Model
     protected $with = ['category'];
 
     protected $appends = ['image_url'];
+    
+    protected $casts = ['isFav' => 'boolean'];
 
     protected function imageUrl(): Attribute
     {
