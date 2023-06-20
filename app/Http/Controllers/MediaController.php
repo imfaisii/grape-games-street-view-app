@@ -34,6 +34,7 @@ class MediaController extends Controller
         $fileName = $request->file->store('public');
 
         auth()->user()->medias()->create([
+            'name' => $request->name,
             'file' => Str::replace("public/", "", $fileName)
         ]);
 
