@@ -13,6 +13,12 @@
 
     <!-- Scripts -->
     @vite('resources/js/app.js')
+
+    <style>
+        .field-required {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>

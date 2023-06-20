@@ -1,6 +1,8 @@
 import "bootstrap";
 import "simplebar";
 import SmoothScroll from "smooth-scroll";
+import * as bootstrap from "bootstrap";
+window.bootstrap = bootstrap;
 
 /*
 

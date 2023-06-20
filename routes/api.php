@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\LocationController;
+use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Auth\Api\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,3 +30,4 @@ Route::post('/login', [AuthController::class, 'store'])
 
 Route::get('locations', [LocationController::class, 'getAllLocations']);
 Route::get('locations/{name}', [LocationController::class, 'getAllLocationsByCategoryName']);
+Route::apiResource('medias', MediaController::class);

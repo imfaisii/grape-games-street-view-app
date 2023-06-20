@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Category::class);
     }
+
+    public function medias()
+    {
+        return $this->hasMany(Media::class);
+    }
 }
