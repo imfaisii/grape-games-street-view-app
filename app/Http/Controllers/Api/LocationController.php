@@ -33,7 +33,8 @@ class LocationController extends Controller
             'country' => $location->country,
             'city' => $location->city,
             'details' => $location->details,
-            'category' => $location?->category?->name ?? 'Not found.'
+            'category' => $location?->category?->name ?? 'Not found.',
+            'thumbnail' => $location->thumbnail
         ]);
 
         return self::success(data: $data);
