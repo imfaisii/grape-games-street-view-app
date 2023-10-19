@@ -14,7 +14,6 @@
                         <th class="border-gray-200">{{ __('Is Favorite?') }}</th>
                         <th class="border-gray-200">{{ __('Country') }}</th>
                         <th class="border-gray-200">{{ __('Category') }}</th>
-                        <th class="border-gray-200">{{ __('Details') }}</th>
                         <th class="border-gray-200">{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -33,7 +32,6 @@
                             </td>
                             <td><span class="fw-normal">{{ "{$location->city}, {$location->country}" }}</span></td>
                             <td><span class="fw-normal">{{ $location?->category?->name ?? 'Not found' }}</span></td>
-                            <td><span class="fw-normal">{{ $location->details }}</span></td>
                             <td>
                                 <div class="d-flex">
                                     <form class="mx-2"
